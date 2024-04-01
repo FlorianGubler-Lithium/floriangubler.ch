@@ -1,1 +1,7 @@
-spring.application.name=floriangubler-ch
+spring:
+  application:
+    name: floriangubler-ch
+  main:
+    banner-mode: off
+  thymeleaf:
+    cache: false
