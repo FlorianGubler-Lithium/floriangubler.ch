@@ -21,7 +21,7 @@ jobs:
     
     - name: Extract branch
       shell: bash
-      run: echo "revision=$(${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//-/g')" >> $GITHUB_OUTPUT
+      run: echo "revision=$( echo '${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}' | sed 's/\//-/g')" >> $GITHUB_OUTPUT
       id: branch
     
     - uses: actions/setup-java@v4
