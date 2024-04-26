@@ -4,7 +4,6 @@ FROM arm64v8/openjdk:17-slim
 ENV INSTALL_PATH="/deployment"
 ARG REVISION
 ENV REVISION_ENV=$REVISION
-RUN dnf upgrade
 COPY ./target/floriangubler-ch-$REVISION_ENV.jar $INSTALL_PATH/florianubler-ch.jar
 
 ENTRYPOINT java -jar $INSTALL_PATH/florianubler-ch.jar
