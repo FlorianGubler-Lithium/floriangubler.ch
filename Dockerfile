@@ -7,4 +7,4 @@ ENV REVISION_ENV=$REVISION
 COPY ./target/floriangubler-ch-$REVISION_ENV.jar $INSTALL_PATH/floriangubler-ch.jar
 
 ENTRYPOINT java -jar $INSTALL_PATH/floriangubler-ch.jar
-EXPOSE 8080
+EXPOSE 443
