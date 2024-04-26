@@ -51,6 +51,6 @@ jobs:
         context: .
         push: true
         platforms: linux/arm64v8
-        tags: ${{ steps.meta.outputs.tags }},latest
+        tags: ${{ steps.meta.outputs.tags }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         labels: ${{ steps.meta.outputs.labels }}
         build-args: REVISION=${{ steps.branch.outputs.revision }}
