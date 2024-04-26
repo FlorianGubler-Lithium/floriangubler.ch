@@ -20,6 +20,6 @@ jobs:
         distribution: 'temurin'
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots verify
-    - run: ls -la
+    - run: ls
     #- name: Build the Docker image
      # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
