@@ -40,6 +40,8 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+    - run: echo ${{ steps.meta.outputs.tags }}
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
