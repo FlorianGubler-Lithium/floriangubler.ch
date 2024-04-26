@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: floriangubler-ch
-          image: ghcr.io/floriangubler/floriangubler.ch
+          image: ghcr.io/floriangubler/floriangubler.ch:release-0.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
