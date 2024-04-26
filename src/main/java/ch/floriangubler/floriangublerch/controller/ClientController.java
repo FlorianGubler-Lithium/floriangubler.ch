@@ -10,7 +10,7 @@ public class ClientController {
 
     @GetMapping("/")
     public String start(Model model) {
-        return "home";
+        return "construct";
     }
 
 }
