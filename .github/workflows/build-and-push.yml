@@ -2,9 +2,9 @@ name: Maven Build and Docker Push
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "release/*" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "release/*" ]
 env:
   REVISION: "0.0.1"
   REGISTRY: ghcr.io
