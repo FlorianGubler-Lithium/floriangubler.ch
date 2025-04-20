@@ -1,0 +1,52 @@
+name: Deploy into private Kubernetes cluster via self-hosted runner
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Target Branch'
+        required: true
+      environment:
+        description: 'Deployment Environment'
+        required: true
+        type: choice
+        options:
+        - dev
+        - prod
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Helm
+      uses: azure/setup-helm@v4
+      
+    - name: Configure Kubeconfig
+      uses: azure/k8s-set-context@v4
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+    
+    - name: Extract branch
+      shell: bash
+      run: echo "revision=$( echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//-/g')" >> $GITHUB_OUTPUT
+      id: branch
+
+    - name: Set repository lower case for image tag
+      shell: bash
+      run: echo "IMAGE_NAME=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+        
+    - name: Deploy the Helm chart
+      run: |
+        helm upgrade \
+        ${{ github.event.repository.name }} \
+        helm \
+        --install \
+        --set env=${{ github.event.inputs.environment }}
+        --set image=ghcr.io/${{ github.repository }}:${{ github.sha }} \
+        --set dockerConfigJson.data="\{\"auths\":\{\"ghcr.io\":\{\"username\":\"${{ github.actor }}\"\,\"password\":\"${{ secrets.REGISTRY_TOKEN }}\"\}\}\}"
