@@ -26,14 +26,6 @@ jobs:
     - name: Set repository lower case for image tag
       shell: bash
       run: echo "IMAGE_NAME=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
-    
-    - uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        
-    - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots verify -Drevision=${{ steps.branch.outputs.revision }}
       
     - name: Log in to the Container registry
       uses: docker/login-action@v3
