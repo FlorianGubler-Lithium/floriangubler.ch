@@ -1,4 +1,4 @@
-name: Maven Build and Docker Push
+name: Build and Docker Push
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    name: Build with Maven and Push to Docker Registry
+    name: Build and Push to Docker Registry
 
     permissions:
       contents: read
