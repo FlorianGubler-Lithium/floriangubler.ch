@@ -1,4 +1,4 @@
-FROM arm64v8/node
+FROM arm64v8/openjdk
 
 WORKDIR /usr/src/app
 
