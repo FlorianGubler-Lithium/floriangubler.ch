@@ -24,8 +24,6 @@ spec:
               protocol: TCP
               name: management
           env:
-            - name: JAVA_TOOL_OPTIONS
-              value: {{ .Values.config.javaToolOptions }}
             - name: KEYSTORE_LOCATION
               value: 'file:/var/run/secrets/java.io/keystores/keystore.p12'
             - name: KEYSTORE_PASSWORD

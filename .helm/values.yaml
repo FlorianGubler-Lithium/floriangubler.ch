@@ -2,9 +2,3 @@ appName: floriangubler-ch
 image:
   repo: ghcr.io/floriangubler/floriangubler.ch
   pullPolicy: Always
-  tag: "latest"
-config:
-  javaToolOptions: >-
-    -Dspring.config.location=classpath:/application.yml,/deployments/config/application.yml
-    -Dfile.encoding=UTF8
-    -Duser.timezone="Europe/Zurich"
