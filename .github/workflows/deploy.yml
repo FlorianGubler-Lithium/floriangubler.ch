@@ -1,0 +1,40 @@
+name: Deploy to Kubernetes Cluster
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment Environment'
+        required: true
+        type: choice
+        options:
+        - development
+        - production
+jobs:
+  deploy:
+    runs-on: self-hosted
+    name: Deployment with Helm
+
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Helm
+      uses: azure/setup-helm@v4
+      
+    - name: Configure Kubeconfig
+      uses: azure/k8s-set-context@v4
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+    
+    - name: Extract branch
+      shell: bash
+      run: echo "revision=$( echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} | sed 's/\//-/g')" >> $GITHUB_OUTPUT
+      id: branch
+        
+    - name: Deploy the Helm chart
+      run: | 
+        helm upgrade ${{ github.event.repository.name }} .helm/ --install --values .helm/env/${{ github.event.inputs.environment }}.yaml --set image.tag=${{ steps.branch.outputs.revision }} --set dockerConfigJson.data="\{\"auths\":\{\"ghcr.io\":\{\"username\":\"${{ github.actor }}\"\,\"password\":\"${{ secrets.REGISTRY_TOKEN }}\"\}\}\}"

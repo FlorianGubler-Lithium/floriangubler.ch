@@ -1,15 +1,15 @@
 name: Maven Build and Docker Push
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ "release/*" ]
-  pull_request:
     branches: [ "release/*" ]
 env:
   REGISTRY: ghcr.io
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    name: Build with Maven and Push to Docker Registry
 
     permissions:
       contents: read
