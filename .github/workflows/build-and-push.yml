@@ -8,7 +8,7 @@ env:
   REGISTRY: ghcr.io
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: Build with Maven and Push to Docker Registry
 
     permissions:
