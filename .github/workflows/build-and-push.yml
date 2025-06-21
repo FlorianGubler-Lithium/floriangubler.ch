@@ -7,9 +7,9 @@ on:
 env:
   REGISTRY: ghcr.io
 jobs:
-  angular-build-and-push:
-    runs-on: ubuntu-latest
-    name: Build Angular App and Push to Docker Registry
+  build-and-push:
+    runs-on: self-hosted
+    name: Build with Maven and Push to Docker Registry
 
     permissions:
       contents: read
