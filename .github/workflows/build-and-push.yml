@@ -1,4 +1,4 @@
-name: Build and Docker Push
+name: Angular Build and Docker Push
 
 on:
   workflow_dispatch:
@@ -7,9 +7,9 @@ on:
 env:
   REGISTRY: ghcr.io
 jobs:
-  build-and-push:
+  angular-build-and-push:
     runs-on: self-hosted
-    name: Build and Push to Docker Registry
+    name: Build Angular App and Push to Docker Registry
 
     permissions:
       contents: read
