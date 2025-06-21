@@ -1,4 +1,4 @@
 appName: floriangubler-ch
 image:
-  repo: ghcr.io/floriangubler/floriangubler.ch
+  repo: ghcr.io/floriangubler-lithium/floriangubler.ch
   pullPolicy: Always
